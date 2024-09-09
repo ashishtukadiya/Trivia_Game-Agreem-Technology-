@@ -1,19 +1,20 @@
 // src/pages/Results.js
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import Result from '../components/Result';
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import Result from "../components/Result";
 
 const Results = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { totalQuestions, correctAnswers, incorrectAnswers } = location.state || {
-    totalQuestions: 0,
-    correctAnswers: 0,
-    incorrectAnswers: 0,
-  };
+  const { totalQuestions, correctAnswers, incorrectAnswers } =
+    location.state || {
+      totalQuestions: 0,
+      correctAnswers: 0,
+      incorrectAnswers: 0,
+    };
 
   const handleRestart = () => {
-    navigate('/');
+    navigate("/");
   };
 
   return (

@@ -1,10 +1,16 @@
 // src/components/Question.js
-import React from 'react';
+import React from "react";
 
-const Question = ({ question, options, onSubmit, selectedAnswer, setSelectedAnswer }) => {
+const Question = ({
+  question,
+  options,
+  onSubmit,
+  selectedAnswer,
+  setSelectedAnswer,
+}) => {
   const handleSubmit = () => {
     if (!selectedAnswer) {
-      alert('Please select an answer!');
+      alert("Please select an answer!");
       return;
     }
     onSubmit(selectedAnswer);

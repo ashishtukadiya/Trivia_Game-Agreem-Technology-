@@ -1,5 +1,5 @@
 // src/components/Result.js
-import React from 'react';
+import React from "react";
 
 const Result = ({ totalQuestions, correctAnswers, incorrectAnswers }) => {
   return (

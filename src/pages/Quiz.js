@@ -1,8 +1,8 @@
 // src/pages/Quiz.js
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Question from '../components/Question';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Question from "../components/Question";
+import { useNavigate } from "react-router-dom";
 
 const Quiz = () => {
   const [questionData, setQuestionData] = useState(null);
@@ -10,12 +10,12 @@ const Quiz = () => {
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
-  const [selectedAnswer, setSelectedAnswer] = useState('');
+  const [selectedAnswer, setSelectedAnswer] = useState("");
   const navigate = useNavigate();
 
   const fetchQuestion = async () => {
     try {
-      const response = await axios.get('https://opentdb.com/api.php?amount=1');
+      const response = await axios.get("https://opentdb.com/api.php?amount=1");
       const data = response.data.results[0];
       setQuestionData({
         question: data.question,
@@ -23,9 +23,9 @@ const Quiz = () => {
         incorrect_answers: data.incorrect_answers,
       });
       setShowAnswer(false);
-      setSelectedAnswer('');
+      setSelectedAnswer("");
     } catch (error) {
-      console.error('Failed to fetch question:', error);
+      console.error("Failed to fetch question:", error);
     }
   };
 
@@ -46,9 +46,9 @@ const Quiz = () => {
   const handleNextQuestion = () => {
     if (currentQuestion < 9) {
       setCurrentQuestion(currentQuestion + 1);
-      setSelectedAnswer('');
+      setSelectedAnswer("");
     } else {
-      navigate('/results', {
+      navigate("/results", {
         state: {
           totalQuestions: 10,
           correctAnswers: correctCount,
@@ -60,7 +60,10 @@ const Quiz = () => {
 
   if (!questionData) return <p>Loading...</p>;
 
-  const options = [...questionData.incorrect_answers, questionData.correct_answer].sort();
+  const options = [
+    ...questionData.incorrect_answers,
+    questionData.correct_answer,
+  ].sort();
 
   return (
     <div className="container">
@@ -78,8 +81,12 @@ const Quiz = () => {
             <p className="correct">Correct!</p>
           ) : (
             <p className="wrong">
-              Wrong! The correct answer is{' '}
-              <span dangerouslySetInnerHTML={{ __html: questionData.correct_answer }}></span>
+              Wrong! The correct answer is{" "}
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: questionData.correct_answer,
+                }}
+              ></span>
             </p>
           )}
           <button onClick={handleNextQuestion}>Next</button>
